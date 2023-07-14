@@ -12,6 +12,7 @@ return [
 
     'email_verified' => '',
     'verification_email_sent' => '',
+    'currently_verified' => '',
 
     'invalid_login_info' => '',
     'no_form_confirmation' => '',

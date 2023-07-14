@@ -37,6 +37,11 @@ class VerificationController extends Controller
             return Redirect::back();
         }
 
+        if ($request->user()->hasVerifiedEmail()) {
+            Session::flash('flash_warning_message',Lang::get('messages.currently_verified'));
+            return Redirect::route('user.panel');
+        }
+
         $rateLimiterKey = 'verification-email' . $request->ip();
         if (RateLimiter::tooManyAttempts($rateLimiterKey,3)) {
             $seconds = RateLimiter::availableIn($rateLimiterKey);
@@ -54,6 +59,11 @@ class VerificationController extends Controller
 
     public function verify(EmailVerificationRequest $request): RedirectResponse
     {
+        if ($request->user()->hasVerifiedEmail()) {
+            Session::flash('flash_warning_message',Lang::get('messages.currently_verified'));
+            return Redirect::route('user.panel');
+        }
+
         $request->fulfill();
         Session::flash('flash_success_message',Lang::get('messages.email_verified'));
         return Redirect::route('user.panel');

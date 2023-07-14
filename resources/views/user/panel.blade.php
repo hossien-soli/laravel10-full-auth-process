@@ -9,6 +9,23 @@
 </div>
 @endunless
 
+<h4 class="mb-4">
+    <span class="badge bg-secondary">{{ $user->full_name }}</span>
+     خوش آمدید!
+</h4>
 
+<div class="mb-4 card">
+    <div class="card-body">
+        <h4 class="mb-4">اعلانات حساب</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="mb-4">پست های من</h4>
+
+        <a href="#" class="btn btn-primary">نمایش همه پست ها</a>
+    </div>
+</div>
 
 @endsection

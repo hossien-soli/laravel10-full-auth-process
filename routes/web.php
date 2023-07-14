@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\PasswordController;
 
 Route::controller(MainController::class)->group(function () {
     Route::name('main.')->group(function () {
@@ -20,6 +21,16 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::post('/register','registerPOST');
     Route::post('/login','loginPOST');
+});
+
+Route::controller(PasswordController::class)->prefix('/password')->group(function () {
+    Route::name('password.')->group(function () {
+        Route::get('/forgot','forgot')->name('forgot');
+        Route::get('/reset','reset')->name('reset');
+    });
+
+    Route::post('/forgot','forgotPOST');
+    Route::post('/reset','resetPOST');
 });
 
 Route::controller(VerificationController::class)->prefix('/verification')->group(function () {

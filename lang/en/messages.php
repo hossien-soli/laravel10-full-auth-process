@@ -16,4 +16,10 @@ return [
 
     'invalid_login_info' => '',
     'no_form_confirmation' => '',
+
+    'invalid_username_or_email' => '',
+
+    'password_reset_link_sent' => '',
+    'password_reset_error' => '',
+    'password_was_reset' => '',
 ];

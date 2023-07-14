@@ -50,6 +50,10 @@
                         <li>
                             <a class="dropdown-item" href="{{ route('auth.register') }}">ثبت نام</a>
                         </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{ route('password.forgot') }}">بازنشانی رمز عبور</a>
+                        </li>
                     </ul>
                     @endauth
                 </li>

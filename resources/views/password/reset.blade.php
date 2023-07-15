@@ -11,12 +11,12 @@
                 <form method="POST" action="{{ route('password.reset') }}">
                     @csrf
 
-                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
-                    <input type="hidden" name="email" value="{{ $request->email }}">
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="email" value="{{ $email }}">
 
                     <div class="mb-3">
                         <label for="resetEmail" class="form-label">آدرس ایمیل</label>
-                        <input value="{{ $request->email }}" type="text" disabled id="resetEmail" class="form-control">
+                        <input value="{{ $email }}" type="text" disabled id="resetEmail" class="form-control">
                     </div>
 
                     <div class="mb-3">

@@ -73,9 +73,15 @@ class PasswordController extends Controller
 
     public function reset(Request $request): View
     {
+        $token = $request->query('token');
+        $email = $request->query('email');
+        $validate = $token && $email;
+        if (!$validate) { abort(404); }
+        $email = strtolower($email);
         $data = [
             'pageTitle' => 'تنظیم رمز عبور جدید',
-            'request' => $request,
+            'token' => $token,
+            'email' => $email,
         ];
         return view('password.reset',$data);
     }

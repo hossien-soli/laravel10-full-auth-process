@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\RateLimiter;
+use App\Events\PasswordResetEvent;
 
 class PasswordController extends Controller
 {
@@ -101,17 +102,28 @@ class PasswordController extends Controller
             'token' => $request->input('token'),
         ];
 
+        $rateLimiterKey = 'password-reset' . $request->ip();
+        if (RateLimiter::tooManyAttempts($rateLimiterKey,3)) {
+            $seconds = RateLimiter::availableIn($rateLimiterKey);
+            $message = $this->rateLimiterMessage($seconds);
+            Session::flash('flash_error_message',$message);
+            return Redirect::back();
+        }
+
         $status = Password::reset($creds,function (User $user,string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
             $user->save();
+            event(new PasswordResetEvent($user));
         });
 
         if ($status != Password::PASSWORD_RESET) {
             Session::flash('flash_error_message',Lang::get('messages.password_reset_error'));
             return Redirect::back();
         }
+
+        RateLimiter::hit($rateLimiterKey,3600);
 
         Session::flash('flash_success_message',Lang::get('messages.password_was_reset'));
         return Redirect::route('auth.login');

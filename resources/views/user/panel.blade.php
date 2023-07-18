@@ -27,5 +27,4 @@
         <a href="#" class="btn btn-primary">نمایش همه پست ها</a>
     </div>
 </div>
-
 @endsection

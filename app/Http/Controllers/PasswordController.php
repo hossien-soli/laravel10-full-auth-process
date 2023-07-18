@@ -15,7 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\RateLimiter;
-use App\Events\PasswordResetEvent;
+use App\Events\PasswordWasReset;
 
 class PasswordController extends Controller
 {
@@ -115,7 +115,7 @@ class PasswordController extends Controller
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
             $user->save();
-            event(new PasswordResetEvent($user));
+            event(new PasswordWasReset($user));
         });
 
         if ($status != Password::PASSWORD_RESET) {

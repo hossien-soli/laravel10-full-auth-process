@@ -18,14 +18,12 @@ class AuthServiceProvider extends ServiceProvider
         //
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     */
     public function boot(): void
     {
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->subject('تایید آدرس ایمیل')
+                ->greeting('سلام!')
                 ->line('جهت تایید آدرس ایمیل روی لینک زیر کلیک کنید.')
                 ->action('تایید آدرس ایمیل',$url);
         });

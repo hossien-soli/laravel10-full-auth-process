@@ -16,7 +16,30 @@
 
 <div class="mb-4 card">
     <div class="card-body">
-        <h4 class="mb-4">اعلانات حساب</h4>
+        <div class="mb-3 clearfix">
+            <div class="float-start">
+                <h4>اعلانات جدید حساب</h4>
+            </div>
+            <div class="float-end">
+                <a href="{{ route('user.notifications') }}" class="btn btn-primary">نمایش همه اعلانات</a>
+            </div>
+        </div>
+
+        <ul class="list-group">
+            @foreach($userUnreadNotifications as $notification)
+                @isset($notification->data['message'])
+                <li class="list-group-item">
+                    {{ $notification->data['message'] }}
+                    <form class="d-inline ms-2" method="POST" action="{{ route('user.panel') }}">
+                        @csrf
+                        <input type="hidden" name="action" value="notification_mark_as_read">
+                        <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                        <button class="btn btn-sm btn-primary" type="submit">متوجه شدم</button>
+                    </form>
+                </li>
+                @endisset
+            @endforeach
+        </ul>
     </div>
 </div>
 

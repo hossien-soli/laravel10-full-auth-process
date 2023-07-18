@@ -8,16 +8,24 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\PasswordWasReset;
 use App\Listeners\SendPasswordWasResetNotification;
+use Illuminate\Auth\Events\Verified;
+use App\Listeners\SendEmailVerifiedNotification;
+use App\Listeners\SendRegisteredNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            SendRegisteredNotification::class,
         ],
 
         PasswordWasReset::class => [
             SendPasswordWasResetNotification::class,
+        ],
+
+        Verified::class => [
+            SendEmailVerifiedNotification::class,
         ],
     ];
 

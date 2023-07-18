@@ -22,4 +22,6 @@ return [
     'password_reset_link_sent' => '',
     'password_reset_error' => '',
     'password_was_reset' => '',
+
+    'no_required_info' => '',
 ];

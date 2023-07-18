@@ -45,7 +45,9 @@ Route::controller(VerificationController::class)->prefix('/verification')->group
 Route::controller(UserController::class)->prefix('/user')->group(function () {
     Route::name('user.')->group(function () {
         Route::get('/panel','panel')->name('panel');
-
+        Route::get('/notifications','notifications')->name('notifications');
         Route::post('/logout','logout')->name('logout');
     });
+
+    Route::post('/panel','panelPOST');
 });

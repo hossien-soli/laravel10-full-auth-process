@@ -45,7 +45,15 @@
 
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-4">پست های من</h4>
+        <div class="mb-3 clearfix">
+            <div class="float-start">
+                <h4>پست های من</h4>
+            </div>
+
+            <div class="float-end">
+                <a href="{{ route('user.createPost') }}" class="btn btn-primary">ایجاد پست جدید</a>
+            </div>
+        </div>
 
         <a href="#" class="btn btn-primary">نمایش همه پست ها</a>
     </div>

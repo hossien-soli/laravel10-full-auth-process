@@ -46,6 +46,7 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
     Route::name('user.')->group(function () {
         Route::get('/panel','panel')->name('panel');
         Route::get('/notifications','notifications')->name('notifications');
+        Route::get('/create-post','createPost')->name('createPost');
         Route::post('/logout','logout')->name('logout');
     });
 

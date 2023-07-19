@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -24,5 +25,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $url = route('password.reset') . '?token=' . $token . '&email=' . $this->email;
         $this->notify(new ResetPasswordNotification($url));
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }

@@ -62,6 +62,20 @@ class UserController extends Controller
 
     }
 
+    public function createPost(): View|RedirectResponse
+    {
+        $user = Auth::user();
+        if (!$user->hasVerifiedEmail()) {
+            Session::flash('flash_error_message','برای ایجاد پست لازم است که ابتدا ایمیل خود را تایید کنید!');
+            return Redirect::route('user.panel');
+        }
+
+        $data = [
+            'pageTitle' => 'ایجاد پست جدید',
+        ];
+        return view('user.create_post',$data);
+    }
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

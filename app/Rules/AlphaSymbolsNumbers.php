@@ -15,7 +15,7 @@ class AlphaSymbolsNumbers implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $validCharsStr = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789!@#$%^&*';
+        $validCharsStr = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789-_!@#$&*';
         $validCharsArr = str_split($validCharsStr);
         $value = (string) $value;
         $valueChars = str_split($value);
